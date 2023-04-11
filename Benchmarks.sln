@@ -3,9 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33502.453
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks.Runner", "src\Benchmarks.Runner\Benchmarks.Runner.csproj", "{EFE377BB-C968-4A79-B21A-07724F0367AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarks.Runner", "src\Benchmarks.Runner\Benchmarks.Runner.csproj", "{EFE377BB-C968-4A79-B21A-07724F0367AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D1F9B393-4A48-4278-A4A4-AAFF3EC0BF44} = {D1F9B393-4A48-4278-A4A4-AAFF3EC0BF44}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks.Api", "src\Benchmarks.Api\Benchmarks.Api.csproj", "{D1F9B393-4A48-4278-A4A4-AAFF3EC0BF44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmarks.Api", "src\Benchmarks.Api\Benchmarks.Api.csproj", "{D1F9B393-4A48-4278-A4A4-AAFF3EC0BF44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

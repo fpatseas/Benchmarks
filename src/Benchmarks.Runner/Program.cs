@@ -1,10 +1,15 @@
-﻿namespace Benchmarks.Runner
+﻿using BenchmarkDotNet.Running;
+using Benchmarks.Runner.Benchmarks;
+
+namespace Benchmarks.Runner
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            BenchmarkRunner.Run<ApiParallelBenchmarks>();
+
+            Console.ReadLine();
         }
     }
 }
