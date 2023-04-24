@@ -7,7 +7,7 @@ namespace Benchmarks.Api
     public class Program
     {
         private static readonly List<string> RatelimitTypes = new List<string> { "requests-per-second", "requests-per-sliding-second", "concurrent-requests" };
-        private static readonly List<int> RatelimitRequestNumbers = Enumerable.Range(1, 101).ToList();
+        private static readonly List<int> RatelimitRequestNumbers = new List<int> { 1, 10, 20, 50, 100 };
 
         public static void Main(string[] args)
         {
@@ -30,7 +30,7 @@ namespace Benchmarks.Api
                         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
                     });
 
-                    rateLimiterOptions.AddFixedWindowLimiter($"{value}/{RatelimitTypes[1]}", options =>
+                    rateLimiterOptions.AddSlidingWindowLimiter($"{value}/{RatelimitTypes[1]}", options =>
                     {
                         options.PermitLimit = value;
                         options.Window = TimeSpan.FromSeconds(1);
@@ -66,6 +66,22 @@ namespace Benchmarks.Api
                         .WithOpenApi();
                 }
             }
+
+            app.MapGet("/ping", async () =>
+            {
+                await Task.Delay(100);
+                return Results.Json(new { message = "pong" });
+            })
+               .WithName("Ping")
+               .WithDescription("Returns 200 OK and pong as the response body");
+
+            //app.Use(next => async context =>
+            //{
+            //    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+            //    logger.LogInformation($"Handling request for {context.Request.Path}");
+            //    await next(context);
+            //    logger.LogInformation($"Finished handling request for {context.Request.Path}");
+            //});
 
             app.Run();
         }

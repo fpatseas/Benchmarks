@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Configs;
+using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Running;
 using Benchmarks.Runner.Benchmarks;
 
 namespace Benchmarks.Runner
@@ -7,7 +9,10 @@ namespace Benchmarks.Runner
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<ApiParallelBenchmarks>();
+            var config = DefaultConfig.Instance
+                .AddDiagnoser(new MemoryDiagnoser(new MemoryDiagnoserConfig(false)));
+
+            BenchmarkRunner.Run<ApiParallelBenchmarks>(config);
 
             Console.ReadLine();
         }
