@@ -1,11 +1,8 @@
-﻿using BenchmarkDotNet.Configs;
-using BenchmarkDotNet.Diagnosers;
-using BenchmarkDotNet.Running;
-using Benchmarks.Runner.Benchmarks;
+﻿using Benchmarks.Runner.Benchmarks.ApiParallelRequests;
 
 namespace Benchmarks.Runner
 {
-    internal class Program
+    internal sealed class Program
     {
         static void Main(string[] args)
         {

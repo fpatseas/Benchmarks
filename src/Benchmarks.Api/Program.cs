@@ -1,10 +1,11 @@
 using System.Threading.RateLimiting;
+using Benchmarks.Api.Middlewares;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
 namespace Benchmarks.Api
 {
-    public class Program
+    internal sealed class Program
     {
         private static readonly List<string> RatelimitTypes = new List<string> { "requests-per-second", "requests-per-sliding-second", "concurrent-requests" };
         private static readonly List<int> RatelimitRequestNumbers = new List<int> { 1, 10, 20, 50, 100 };
@@ -67,6 +68,8 @@ namespace Benchmarks.Api
                 }
             }
 
+            app.UseMiddleware<RequestLoggingMiddleware>();
+
             app.MapGet("/ping", async () =>
             {
                 await Task.Delay(100);
@@ -74,14 +77,6 @@ namespace Benchmarks.Api
             })
                .WithName("Ping")
                .WithDescription("Returns 200 OK and pong as the response body");
-
-            //app.Use(next => async context =>
-            //{
-            //    var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
-            //    logger.LogInformation($"Handling request for {context.Request.Path}");
-            //    await next(context);
-            //    logger.LogInformation($"Finished handling request for {context.Request.Path}");
-            //});
 
             app.Run();
         }

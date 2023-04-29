@@ -3,7 +3,7 @@
 The solution uses the BenchmarkDotNet library to run the benchmarks.
 
 ### Usage
-To run the benchmarks, simply build the solution and run both Benchmarks.Api and Benchmarks.Runner
+To run the benchmarks, simply build the solution and run both Benchmarks.Api and Benchmarks.Runner in Release mode.
 
 ### Contributing
 If you would like to contribute, please feel free to fork the repository and submit a pull request.
